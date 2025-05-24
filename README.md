@@ -1,6 +1,6 @@
-# Atec-full-node-guide-for-degens
+# Atec-node-guide-for-degens
 
-## eth-prysm-node
+# Eth-Prysm-node
 Step by step guide for setting up a `docker-compose.yml` for running a `Sepolia` Ethereum full node using **Geth** as the `execution client` and **Prysm** as the `consensus client` on an Ubuntu-based system.
 
 ___
