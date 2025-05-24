@@ -150,8 +150,8 @@ services:
       - 8546:8546
       - 8551:8551
     volumes:
-      - /home/<Linuxuser>/execution:/data
-      - /home/<Linuxuser>/jwt.hex:/data/jwt.hex
+      - /root/ethereum/execution:/data
+      - /root/ethereum/jwt.hex:/data/jwt.hex
     command:
       - --sepolia
       - --http
@@ -175,8 +175,8 @@ services:
     network_mode: host
     restart: unless-stopped
     volumes:
-      - /home/<Linuxuser>/consensus:/data
-      - /home/<Linuxuser>/jwt.hex:/data/jwt.hex
+      - /root/ethereum/consensus:/data
+      - /root/ethereum/jwt.hex:/data/jwt.hex
     depends_on:
       - geth
     ports:
@@ -229,7 +229,7 @@ ___
 ```
 curl -X POST -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_syncing","params":[],"id":1}' http://localhost:8545
 ```
-*✅Response if fully synced:
+✅Response if fully synced:
 ```json
 {"jsonrpc":"2.0","id":1,"result":false}
 ```
@@ -255,7 +255,8 @@ If `is_syncing` is `false` and `sync_distance` is `0`, the beacon node is fully 
 ```
 If `is_syncing` is `true`, the node is still syncing, and `sync_distance` indicates how many slots behind it is.
 
----
+___
+
 
 
 ## Step 8. Getting the RPC Endpoints
@@ -278,6 +279,9 @@ Creates the `nodeaztec/aztec` directory under your home folder, including any pa
 ```bash
 mkdir -p ~/nodeaztec/aztec
 ```
+___
+
+
 ## Step 2. Add Aztec CLI to Your System PATH
 This appends the Aztec binary path (~/.aztec/bin) to your PATH environment variable in the .bashrc file, so that your system can recognize the aztec command from any terminal.```bash
 echo 'export PATH="$HOME/.aztec/bin:$PATH"' >> ~/.bashrc
@@ -285,6 +289,9 @@ echo 'export PATH="$HOME/.aztec/bin:$PATH"' >> ~/.bashrc
 This reloads the .bashrc file to apply the updated PATH immediately without needing to restart the terminal.```bash
 source ~/.bashrc
 ```
+
+___
+
 
 ## Step 3. Install Aztec
 Downloads and runs Aztec’s official installer script in an interactive Bash shell, installing the latest Aztec CLI tools.
@@ -309,8 +316,24 @@ Switches or initializes your Aztec environment to the Alpha Testnet configuratio
 ```bash
 aztec-up alpha-testnet
 ```
+___
 
-## Step 4. Configure `docker-compose.yml`
+
+## Step 4. Enable Firewall & Open Ports
+```bash
+# Firewall
+ufw allow 22
+ufw allow ssh
+ufw enable
+
+# Sequencer
+ufw allow 40400
+ufw allow 8080
+```
+___
+
+
+## Step 5. Configure `docker-compose.yml`
 
 Changes your working directory to the `nodeaztec` folder where your Aztec node’s Docker Compose configuration is located.
 ```bash
