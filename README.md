@@ -1,4 +1,4 @@
-# Atec-node-guide-for-degens
+# AZTEC-NODE-GUIDE-FOR-DEGENS
 
 ___
 
