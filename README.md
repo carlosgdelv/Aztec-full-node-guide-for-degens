@@ -492,7 +492,7 @@ docker exec -it nodeaztec-node-1 du -sh /data/*
 ```
 ___
 
-# Simple Docker Guide
+## Simple Docker Guide
 
 ## Check running containers
 Shows all currently running Docker containers.
